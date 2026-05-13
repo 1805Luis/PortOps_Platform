@@ -1,0 +1,15 @@
+spring:
+    application:
+        name: auth-service
+    jpa:
+        hibernate:
+            naming:
+                implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+                
+    profiles:
+        active: local
+
+server:
+    servlet:
+        context-path: /api

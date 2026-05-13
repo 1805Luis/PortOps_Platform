@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${HOST_DB}:${PORT_DB}/db_catalog?sslmode=disable
+    username: ${USER_DB}
+    password: ${PASS_DB}
+  
+  flyway:
+    url: jdbc:postgresql://${HOST_DB}:${PORT_DB}/db_catalog?sslmode=disable
+    user: ${FLYWAY_USER}
+    password: ${FLYWAY_PASS}
+
+
+eureka:
+  client:
+    enabled: false
+
+server:
+  port: ${PORT:8004}
