@@ -10,6 +10,8 @@ CREATE ROLE flyway_user WITH LOGIN PASSWORD 'flyway_pass';
 GRANT CONNECT ON DATABASE db_auth TO auth_user;
 GRANT CONNECT ON DATABASE db_auth TO flyway_user;
 
+GRANT CREATE ON DATABASE db_auth TO flyway_user;
+
 -- ============================================
 -- 3. Permisos sobre SCHEMA
 -- ============================================
