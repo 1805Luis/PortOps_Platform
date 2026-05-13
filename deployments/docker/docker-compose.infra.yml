@@ -1,0 +1,19 @@
+services:
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: portops-keycloak
+    command: start-dev --import-realm 
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak/realm-portops.json:/opt/keycloak/data/import/realm-portops.json
+    networks:
+      - portops-net
+
+networks:
+  portops-net:
+    driver: bridge
