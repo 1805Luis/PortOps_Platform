@@ -1,0 +1,4 @@
+microservicios/.vscode
+
+deployments/docker/bases_datos/*/data/*
+!deployments/docker/bases_datos/*/data/.gitkeep
