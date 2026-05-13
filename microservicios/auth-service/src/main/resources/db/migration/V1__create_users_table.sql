@@ -11,14 +11,14 @@ CREATE SCHEMA IF NOT EXISTS auth;
 -- Identity base
 
 CREATE TABLE auth.user_context (
-    keycloak_id VARCHAR(100) PRIMARY KEY,
+    keycloak_id VARCHAR(100) PRIMARY KEY
 );
 
 -- Companies (multi-tenant)
-CREATE TABLE auth.user_companies (
+CREATE TABLE auth.user_organization (
     keycloak_id VARCHAR(100) REFERENCES auth.user_context(keycloak_id) ON DELETE CASCADE,
-    company_id UUID NOT NULL,
-    PRIMARY KEY (keycloak_id, company_id)
+    organization_id UUID NOT NULL,
+    PRIMARY KEY (keycloak_id, organization_id)
 );
 
 -- Ports (multi-access)
