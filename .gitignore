@@ -1,3 +1,4 @@
+.vscode
 microservicios/.vscode
 
 deployments/docker/bases_datos/*/data/*
