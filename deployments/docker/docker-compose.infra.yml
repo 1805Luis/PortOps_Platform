@@ -13,6 +13,23 @@ services:
       - ./keycloak/realm-portops.json:/opt/keycloak/data/import/realm-portops.json
     networks:
       - portops-net
+  
+  db-auth:
+    image: postgres:16
+    container_name: auth-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db_ship
+      PGDATA: /var/lib/postgresql/data/pg_data
+    ports:
+      - "3308:5432"
+    volumes:
+      - ./bases_datos/auth/data:/var/lib/postgresql/data
+      - ./bases_datos/auth/init:/docker-entrypoint-initdb.d
+    networks:
+      - portops-net
 
 networks:
   portops-net:
