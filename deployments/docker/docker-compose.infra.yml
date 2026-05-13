@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: db_ship
+      POSTGRES_DB: db_auth
       PGDATA: /var/lib/postgresql/data/pg_data
     ports:
       - "3308:5432"
