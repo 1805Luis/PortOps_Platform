@@ -1,0 +1,292 @@
+{
+  "realm": "portops",
+  "displayName": "PortOps Maritime",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "accessTokenLifespan": 3600,
+
+  "roles": {
+    "realm": [
+      { "name": "ADMIN",                  "description": "Acceso total al sistema sin restricciones de puerto ni dominio" },
+      { "name": "VIEWER",                 "description": "Acceso de solo lectura a datos permitidos por su puerto o ámbito" },
+      { "name": "PORT_ADMIN",             "description": "Gestión operativa y administrativa del puerto (infraestructura, recursos, concesiones)" },
+      { "name": "PORT_OPERATOR",          "description": "Ejecución de operaciones portuarias (coordinación de atraques, recursos y flujo operativo)" },
+      { "name": "MARITIME_AUTHORITY",     "description": "Autoriza entrada/salida de buques y regula la navegación en el puerto" },
+      { "name": "PILOT",                  "description": "Asistencia técnica en maniobras de entrada/salida de buques dentro del puerto" },
+      { "name": "VESSEL_CAPTAIN",         "description": "Control del propio buque y solicitud de operaciones portuarias" },
+      { "name": "SHIP_AGENT",             "description": "Representación de la naviera en trámites operativos y documentales del puerto" },
+      { "name": "CARRIER",               "description": "Transporte terrestre de mercancías desde y hacia el puerto" },
+      { "name": "STEVEDORE",             "description": "Ejecución de carga y descarga de mercancías en operaciones portuarias" },
+      { "name": "MOORING_TEAM",          "description": "Operaciones de amarre y desamarre de buques" },
+      { "name": "CUSTOMS_OFFICER",       "description": "Autoridad aduanera para inspección y control de mercancías" },
+      { "name": "BORDER_CONTROL",        "description": "Control de acceso de personas y documentación en el puerto" },
+      { "name": "EMERGENCY_COORDINATOR", "description": "Gestión y coordinación de emergencias en el entorno portuario" },
+      { "name": "RESCUE_TEAM",           "description": "Ejecución de operaciones de rescate marítimo y portuario" },
+      { "name": "ENVIRONMENTAL_RESPONSE","description": "Gestión de incidentes ambientales (derrames, contaminación)" }
+    ]
+  },
+
+
+
+  "clients": [
+    {
+      "clientId": "portops-api",
+      "name": "PortOps API",
+      "enabled": true,
+      "publicClient": false,
+      "bearerOnly": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    },
+    {
+      "clientId": "portops-app",
+      "name": "PortOps App",
+      "enabled": true,
+      "publicClient": true,
+      "bearerOnly": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "http://localhost:3000/*",
+        "http://localhost:8090/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "http://localhost:8090"
+      ],
+      "protocolMappers": [
+        {
+          "name": "roles-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "role",
+            "jsonType.label": "String",
+            "multivalued": "true"
+          }
+        }
+      ]
+    }
+  ],
+
+  "users": [
+    {
+      "id": "a0000000-0000-0000-0000-000000000001",
+      "username": "admin.portops",
+      "email": "admin@portops.com",
+      "firstName": "Sistema",
+      "lastName": "PortOps",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Admin@2026!", "temporary": false }],
+      "realmRoles": ["ADMIN"]
+    },
+    {
+      "id": "b1000000-0001-0001-0001-000000000001",
+      "username": "joan.puigdomènech",
+      "email": "j.puigdomenech@portbcn.es",
+      "firstName": "Joan",
+      "lastName": "Puigdomènech",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "PortAdmin@2026!", "temporary": false }],
+      "realmRoles": ["PORT_ADMIN"]
+    },
+    {
+      "id": "b1000000-0002-0002-0002-000000000002",
+      "username": "marta.espinosa",
+      "email": "m.espinoса@portbcn.es",
+      "firstName": "Marta",
+      "lastName": "Espinosa",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Operator@2026!", "temporary": false }],
+      "realmRoles": ["PORT_OPERATOR"]
+    },
+    {
+      "id": "b1000000-0003-0003-0003-000000000003",
+      "username": "capitan.puerto.bcn",
+      "email": "capitania@portesbcn.es",
+      "firstName": "Francesc",
+      "lastName": "Torralba",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Maritime@2026!", "temporary": false }],
+      "realmRoles": ["MARITIME_AUTHORITY"]
+    },
+    {
+      "id": "b1000000-0004-0004-0004-000000000004",
+      "username": "jordi.vila.practico",
+      "email": "j.vila@practicosbarcelona.es",
+      "firstName": "Jordi",
+      "lastName": "Vila",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Pilot@2026!", "temporary": false }],
+      "realmRoles": ["PILOT"]
+    },
+    {
+      "id": "2000000-0001-0001-0001-000000000001",
+      "username": "capt.henrik.larsen",
+      "email": "h.larsen@msc.com",
+      "firstName": "Henrik",
+      "lastName": "Larsen",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Captain@2026!", "temporary": false }],
+      "realmRoles": ["VESSEL_CAPTAIN"]
+    },
+    {
+      "id": "c2000000-0002-0002-0002-000000000002",
+      "username": "capt.ahmed.hassan",
+      "email": "a.hassan@maersk.com",
+      "firstName": "Ahmed",
+      "lastName": "Hassan",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Captain@2026!", "temporary": false }],
+      "realmRoles": ["VESSEL_CAPTAIN"]
+    },
+    {
+      "id": "c2000000-0003-0003-0003-000000000003",
+      "username": "capt.pierre.dubois",
+      "email": "p.dubois@cmacgm.com",
+      "firstName": "Pierre",
+      "lastName": "Dubois",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Captain@2026!", "temporary": false }],
+      "realmRoles": ["VESSEL_CAPTAIN"]
+    },
+    {
+      "id": "d3000000-0001-0001-0001-000000000001",
+      "username": "elena.bosch.agent",
+      "email": "e.bosch@mscagents.es",
+      "firstName": "Elena",
+      "lastName": "Bosch",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Agent@2026!", "temporary": false }],
+      "realmRoles": ["SHIP_AGENT"]
+    },
+    {
+      "id": "d3000000-0002-0002-0002-000000000002",
+      "username": "carlos.fuster.agent",
+      "email": "c.fuster@maerskagents.es",
+      "firstName": "Carlos",
+      "lastName": "Fuster",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Agent@2026!", "temporary": false }],
+      "realmRoles": ["SHIP_AGENT"]
+    },
+    {
+      "id": "d3000000-0003-0003-0003-000000000003",
+      "username": "transport.dhl.bcn",
+      "email": "barcelona@dhl-freight.es",
+      "firstName": "Roberto",
+      "lastName": "Sánchez",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Carrier@2026!", "temporary": false }],
+      "realmRoles": ["CARRIER"]
+    },
+    {
+      "id": "e4000000-0001-0001-0001-000000000001",
+      "username": "antonio.roca.estibador",
+      "email": "a.roca@estibadoresbcn.es",
+      "firstName": "Antonio",
+      "lastName": "Roca",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Stevedore@2026!", "temporary": false }],
+      "realmRoles": ["STEVEDORE"]
+    },
+    {
+      "id": "e4000000-0002-0002-0002-000000000002",
+      "username": "paco.martinez.amarre",
+      "email": "p.martinez@amarrebcn.es",
+      "firstName": "Francisco",
+      "lastName": "Martínez",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Mooring@2026!", "temporary": false }],
+      "realmRoles": ["MOORING_TEAM"]
+    },
+    {
+      "id": "f5000000-0001-0001-0001-000000000001",
+      "username": "inspector.aduana.bcn",
+      "email": "aduana.bcn@aeat.es",
+      "firstName": "Isabel",
+      "lastName": "Carmona",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Customs@2026!", "temporary": false }],
+      "realmRoles": ["CUSTOMS_OFFICER"]
+    },
+    {
+      "id": "f5000000-0002-0002-0002-000000000002",
+      "username": "frontera.bcn.control",
+      "email": "frontera.bcn@policia.es",
+      "firstName": "Miguel",
+      "lastName": "Delgado",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Border@2026!", "temporary": false }],
+      "realmRoles": ["BORDER_CONTROL"]
+    },
+    {
+      "id": "g6000000-0001-0001-0001-000000000001",
+      "username": "coord.emergencias.bcn",
+      "email": "emergencias@portbcn.es",
+      "firstName": "Raquel",
+      "lastName": "Domínguez",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Emergency@2026!", "temporary": false }],
+      "realmRoles": ["EMERGENCY_COORDINATOR"]
+    },
+    {
+      "id": "g6000000-0002-0002-0002-000000000002",
+      "username": "rescate.maritimo.bcn",
+      "email": "salvamento@sasemar.es",
+      "firstName": "David",
+      "lastName": "Herrera",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Rescue@2026!", "temporary": false }],
+      "realmRoles": ["RESCUE_TEAM"]
+    },
+    {
+      "id": "g6000000-0003-0003-0003-000000000003",
+      "username": "medioambiente.bcn",
+      "email": "medioambiente@portbcn.es",
+      "firstName": "Cristina",
+      "lastName": "Navarro",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "EnvResp@2026!", "temporary": false }],
+      "realmRoles": ["ENVIRONMENTAL_RESPONSE"]
+    },
+    {
+      "id": "h7000000-0001-0001-0001-000000000001",
+      "username": "visor.operaciones.bcn",
+      "email": "visor@portbcn.es",
+      "firstName": "Laura",
+      "lastName": "Vidal",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Viewer@2026!", "temporary": false }],
+      "realmRoles": ["VIEWER"]
+    }
+  ]
+}
