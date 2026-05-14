@@ -12,37 +12,11 @@ public class UserContext {
     private String keycloakId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserOrganization> organizations;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserPort> ports;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserShip> ships;
+    private Set<UserAssignment> assignments;
 
     public UserContext() {}
 
     public UserContext(String keycloakId) {
         this.keycloakId = keycloakId;
-    }
-
-    public String getKeycloakId() {
-        return keycloakId;
-    }
-
-    public void setKeycloakId(String keycloakId) {
-        this.keycloakId = keycloakId;
-    }
-
-    public Set<UserOrganization> getOrganizations() {
-        return organizations;
-    }
-
-    public Set<UserPort> getPorts() {
-        return ports;
-    }
-
-    public Set<UserShip> getShips() {
-        return ships;
     }
 }
