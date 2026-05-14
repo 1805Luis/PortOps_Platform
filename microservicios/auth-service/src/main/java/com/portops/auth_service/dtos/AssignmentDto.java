@@ -3,6 +3,8 @@ package com.portops.auth_service.dtos;
 import java.time.Instant;
 import java.util.UUID;
 
+import com.portops.auth_service.model.EntityType;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AssignmentDto {
 
-    private String entityType; // PORT / SHIP / ORGANIZATION
+    private EntityType entityType; // PORT / SHIP / ORGANIZATION
 
     private UUID entityId;
 
