@@ -1,36 +1,32 @@
--- =========================================
--- Auth Service - Users Table (PostgreSQL)
--- Flyway V2
--- =========================================
-
 CREATE SCHEMA IF NOT EXISTS auth;
 
 -- =========================
--- USERS TABLE
+-- USER CONTEXT (identidad base)
 -- =========================
--- Identity base
-
 CREATE TABLE auth.user_context (
     keycloak_id VARCHAR(100) PRIMARY KEY
 );
 
--- Companies (multi-tenant)
-CREATE TABLE auth.user_organization (
-    keycloak_id VARCHAR(100) REFERENCES auth.user_context(keycloak_id) ON DELETE CASCADE,
-    organization_id UUID NOT NULL,
-    PRIMARY KEY (keycloak_id, organization_id)
-);
+-- =========================
+-- USER ASSIGNMENTS (NUEVO MODELO)
+-- =========================
+CREATE TABLE auth.user_assignment (
 
--- Ports (multi-access)
-CREATE TABLE auth.user_ports (
-    keycloak_id VARCHAR(100) REFERENCES auth.user_context(keycloak_id) ON DELETE CASCADE,
-    port_id UUID NOT NULL,
-    PRIMARY KEY (keycloak_id, port_id)
-);
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
--- Ships (multi-assignment)
-CREATE TABLE auth.user_ships (
-    keycloak_id VARCHAR(100) REFERENCES auth.user_context(keycloak_id) ON DELETE CASCADE,
-    ship_id UUID NOT NULL,
-    PRIMARY KEY (keycloak_id, ship_id)
+    user_id VARCHAR(100),
+    entity_type VARCHAR(20) NOT NULL,   -- SHIP / PORT / ORGANIZATION
+    entity_id UUID NOT NULL,
+
+    role_in_context VARCHAR(50) NOT NULL,
+
+    start_date TIMESTAMP NOT NULL DEFAULT now(),
+    end_date TIMESTAMP NULL,
+
+    status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id)
+        REFERENCES auth.user_context(keycloak_id)
+        ON DELETE CASCADE
 );
