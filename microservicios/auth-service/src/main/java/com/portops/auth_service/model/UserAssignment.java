@@ -4,10 +4,16 @@ import java.time.Instant;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "user_assignment", schema = "auth")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserAssignment {
 
     @Id
