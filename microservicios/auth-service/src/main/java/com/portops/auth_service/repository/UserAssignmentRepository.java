@@ -16,15 +16,7 @@ public interface UserAssignmentRepository extends JpaRepository<UserAssignment, 
 
     List<UserAssignment> findByUserIdAndStatus(String userId, String status);
 
-    List<UserAssignment> findByUserIdAndEntityTypeAndStatus(
-        String userId,
-        EntityType entityType,
-        String status
-    );
+    List<UserAssignment> findByUserIdAndEntityTypeAndStatus(String userId, EntityType entityType, String status);
 
-    List<UserAssignment> findByEntityTypeAndEntityIdAndStatus(
-        EntityType entityType,
-        UUID entityId,
-        String status
-    );
+    List<UserAssignment> findByEntityTypeAndEntityIdAndStatus(EntityType entityType, UUID entityId, String status);
 }
