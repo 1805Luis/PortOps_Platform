@@ -19,4 +19,6 @@ public interface UserAssignmentRepository extends JpaRepository<UserAssignment, 
     List<UserAssignment> findByUserIdAndEntityTypeAndStatus(String userId, EntityType entityType, String status);
 
     List<UserAssignment> findByEntityTypeAndEntityIdAndStatus(EntityType entityType, UUID entityId, String status);
+
+    boolean existsByUserIdAndEntityTypeAndEntityIdAndStatus(String userId, EntityType entityType, UUID entityId, String status);
 }
