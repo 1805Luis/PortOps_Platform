@@ -53,11 +53,11 @@ INSERT INTO auth.user_assignment (user_id, scope, entity_type, entity_id, role_i
 -- =========================
 -- VESSEL CAPTAINS
 -- =========================
-('c2000000-0002-0002-0002-000000000001', 'SHIP', 'SHIP', '11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'VESSEL_CAPTAIN'),
+('c2000000-0002-0002-0002-000000000001', 'SHIP', 'SHIP', '11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'CAPTAIN'),
 
-('c2000000-0002-0002-0002-000000000002', 'SHIP', 'SHIP', '22222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'VESSEL_CAPTAIN'),
+('c2000000-0002-0002-0002-000000000002', 'SHIP', 'SHIP', '22222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'CAPTAIN '),
 
-('c2000000-0003-0003-0003-000000000003', 'SHIP', 'SHIP', '33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'VESSEL_CAPTAIN'),
+('c2000000-0003-0003-0003-000000000003', 'SHIP', 'SHIP', '33333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'CAPTAIN'),
 
 -- =========================
 -- SHIP AGENTS
