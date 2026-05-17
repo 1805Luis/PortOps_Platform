@@ -1,3 +1,12 @@
-FROM flyway/flyway:9.22.3
+FROM flyway/flyway:11.14.1
 
+# Copiamos solo las migraciones del microservicio
 COPY src/main/resources/db/migration /flyway/sql
+
+ENV FLYWAY_SCHEMAS=auth
+ENV FLYWAY_DEFAULT_SCHEMA=auth
+ENV FLYWAY_URL=jdbc:postgresql://db_auth:5432/db_auth
+ENV FLYWAY_USER=flyway_user
+ENV FLYWAY_PASSWORD=flyway_pass
+
+ENTRYPOINT ["flyway", "migrate"]
