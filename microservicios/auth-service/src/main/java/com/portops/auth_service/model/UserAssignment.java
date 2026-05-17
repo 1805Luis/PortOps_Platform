@@ -21,8 +21,12 @@ public class UserAssignment {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserContext user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "scope", nullable = false)
+    private Scope scope;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "entity_type")
@@ -31,7 +35,7 @@ public class UserAssignment {
     @Column(name = "entity_id")
     private UUID entityId;
 
-    @Column(name = "role_in_context")
+    @Column(name = "role_in_context", nullable = false)
     private String roleInContext;
 
     @Column(name = "start_date")
