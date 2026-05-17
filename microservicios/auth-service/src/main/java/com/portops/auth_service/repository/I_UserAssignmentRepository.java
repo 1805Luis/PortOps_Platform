@@ -10,15 +10,16 @@ import com.portops.auth_service.model.EntityType;
 import com.portops.auth_service.model.UserAssignment;
 
 @Repository
-public interface UserAssignmentRepository extends JpaRepository<UserAssignment, UUID> {
+public interface I_UserAssignmentRepository
+        extends JpaRepository<UserAssignment, UUID> {
 
-    List<UserAssignment> findByUserId(String userId);
+    List<UserAssignment> findByUserKeycloakId(String keycloakId);
 
-    List<UserAssignment> findByUserIdAndStatus(String userId, String status);
+    List<UserAssignment> findByUserKeycloakIdAndStatus(String keycloakId, String status);
 
-    List<UserAssignment> findByUserIdAndEntityTypeAndStatus(String userId, EntityType entityType, String status);
+    List<UserAssignment> findByUserKeycloakIdAndEntityTypeAndStatus(String keycloakId, EntityType entityType, String status);
 
     List<UserAssignment> findByEntityTypeAndEntityIdAndStatus(EntityType entityType, UUID entityId, String status);
 
-    boolean existsByUserIdAndEntityTypeAndEntityIdAndStatus(String userId, EntityType entityType, UUID entityId, String status);
+    boolean existsByUserKeycloakIdAndEntityTypeAndEntityIdAndStatus(String keycloakId, EntityType entityType, UUID entityId, String status );
 }

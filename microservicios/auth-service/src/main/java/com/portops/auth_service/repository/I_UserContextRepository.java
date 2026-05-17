@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.portops.auth_service.model.UserContext;
 
 @Repository
-public interface UserContextRepository extends JpaRepository<UserContext, String> {
+public interface I_UserContextRepository extends JpaRepository<UserContext, String> {
 
     
 } 
