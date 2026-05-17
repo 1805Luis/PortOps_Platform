@@ -3,7 +3,6 @@ package com.portops.auth_service.scheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.portops.auth_service.repository.I_UserAssignmentRepository;
 import com.portops.auth_service.service.I_SchedulerService;
 
 import jakarta.persistence.EntityManager;
