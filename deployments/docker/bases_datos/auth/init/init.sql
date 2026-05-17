@@ -1,52 +1,60 @@
 -- ============================================
--- 1. Crear roles
+-- 1. Crear roles (solo si no existen)
 -- ============================================
-CREATE ROLE auth_user WITH LOGIN PASSWORD 'auth_pass';
-CREATE ROLE flyway_user WITH LOGIN PASSWORD 'flyway_pass';
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'auth_user') THEN
+        CREATE ROLE auth_user WITH LOGIN PASSWORD 'auth_pass';
+    END IF;
+
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'flyway_user') THEN
+        CREATE ROLE flyway_user WITH LOGIN PASSWORD 'flyway_pass';
+    END IF;
+END$$;
 
 -- ============================================
--- 2. Permisos base sobre DB
+-- 2. Permisos base sobre la base de datos
 -- ============================================
 GRANT CONNECT ON DATABASE db_auth TO auth_user;
 GRANT CONNECT ON DATABASE db_auth TO flyway_user;
 
+-- Flyway necesita crear tablas → CREATE en la DB
 GRANT CREATE ON DATABASE db_auth TO flyway_user;
 
 -- ============================================
--- 3. Permisos sobre SCHEMA
+-- 3. Crear esquema (si no existe)
 -- ============================================
-GRANT USAGE ON SCHEMA public TO auth_user;
-GRANT USAGE ON SCHEMA public TO flyway_user;
+CREATE SCHEMA IF NOT EXISTS auth AUTHORIZATION flyway_user;
 
-GRANT ALL ON SCHEMA public TO flyway_user;
+-- Permitir que ambos roles usen el esquema
+GRANT USAGE ON SCHEMA auth TO auth_user;
+GRANT USAGE ON SCHEMA auth TO flyway_user;
 
 -- ============================================
--- 4. PERMISOS FUTUROS (Flyway crea → auth_user usa)
+-- 4. DEFAULT PRIVILEGES (para objetos futuros)
 -- ============================================
 
--- Tablas futuras creadas por flyway_user
-ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA public
+-- Tablas futuras creadas por flyway_user → auth_user puede usarlas
+ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA auth
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO auth_user;
 
--- Secuencias futuras
-ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA public
+-- Secuencias futuras creadas por flyway_user → auth_user puede usarlas
+ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA auth
 GRANT USAGE, SELECT ON SEQUENCES TO auth_user;
 
--- Flyway sobre sus propios objetos
-ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA public
+-- Flyway debe tener control total sobre sus objetos
+ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA auth
 GRANT ALL ON TABLES TO flyway_user;
 
-ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA public
+ALTER DEFAULT PRIVILEGES FOR ROLE flyway_user IN SCHEMA auth
 GRANT ALL ON SEQUENCES TO flyway_user;
 
 -- ============================================
--- 5. PERMISOS PARA TABLAS YA EXISTENTES (CLAVE)
+-- 5. PERMISOS PARA TABLAS YA EXISTENTES
 -- ============================================
 
 GRANT SELECT, INSERT, UPDATE, DELETE
-ON ALL TABLES IN SCHEMA public
-TO auth_user;
+ON ALL TABLES IN SCHEMA auth TO auth_user;
 
 GRANT USAGE, SELECT
-ON ALL SEQUENCES IN SCHEMA public
-TO auth_user;
+ON ALL SEQUENCES IN SCHEMA auth TO auth_user;
