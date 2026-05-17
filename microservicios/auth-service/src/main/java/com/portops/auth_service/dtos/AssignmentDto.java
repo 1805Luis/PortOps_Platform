@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 import com.portops.auth_service.model.EntityType;
+import com.portops.auth_service.model.Scope;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssignmentDto {
+
+    private Scope scope;
 
     private EntityType entityType; // PORT / SHIP / ORGANIZATION
 

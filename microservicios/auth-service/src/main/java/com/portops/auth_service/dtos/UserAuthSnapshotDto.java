@@ -1,6 +1,5 @@
 package com.portops.auth_service.dtos;
 
-import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,5 +20,4 @@ public class UserAuthSnapshotDto {
 
     private Map<UUID, String> shipRoles;
 
-    private Instant expiresAt;
 }
