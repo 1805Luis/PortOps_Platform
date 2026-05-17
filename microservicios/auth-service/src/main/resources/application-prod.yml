@@ -1,14 +1,17 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${HOST_DB}:${PORT_DB}/db_catalog?sslmode=disable
+    url: jdbc:postgresql://${HOST_DB}:${PORT_DB}/db_auth?sslmode=disable
     username: ${USER_DB}
     password: ${PASS_DB}
   
   flyway:
-    url: jdbc:postgresql://${HOST_DB}:${PORT_DB}/db_catalog?sslmode=disable
+    url: ${FLYWAY_URL}
     user: ${FLYWAY_USER}
     password: ${FLYWAY_PASS}
+    default-schema: ${FLYWAY_DEFAULT_SCHEMA}
+    schemas: $FLYWAY_SCHEMAS}
+    create-schemas: false
 
 
 eureka:

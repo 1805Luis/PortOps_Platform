@@ -5,11 +5,14 @@ spring:
         username: auth_user
         password: auth_pass
 
-  
     flyway:
         url: jdbc:postgresql://localhost:3308/db_auth?sslmode=disable
         user: flyway_user
         password: flyway_pass
+        default-schema: auth
+        schemas: auth
+        create-schemas: false
+
 
 eureka:
     client:
