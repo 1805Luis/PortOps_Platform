@@ -18,7 +18,7 @@
       { "name": "PORT_OPERATOR",          "description": "Ejecución de operaciones portuarias (coordinación de atraques, recursos y flujo operativo)" },
       { "name": "MARITIME_AUTHORITY",     "description": "Autoriza entrada/salida de buques y regula la navegación en el puerto" },
       { "name": "PILOT",                  "description": "Asistencia técnica en maniobras de entrada/salida de buques dentro del puerto" },
-      { "name": "VESSEL_CAPTAIN",         "description": "Control del propio buque y solicitud de operaciones portuarias" },
+      { "name": "VESSEL_WORKER",         "description": "Control del propio buque y solicitud de operaciones portuarias" },
       { "name": "SHIP_AGENT",             "description": "Representación de la naviera en trámites operativos y documentales del puerto" },
       { "name": "CARRIER",               "description": "Transporte terrestre de mercancías desde y hacia el puerto" },
       { "name": "STEVEDORE",             "description": "Ejecución de carga y descarga de mercancías en operaciones portuarias" },
@@ -143,7 +143,7 @@
       "enabled": true,
       "emailVerified": true,
       "credentials": [{ "type": "password", "value": "Captain@2026!", "temporary": false }],
-      "realmRoles": ["VESSEL_CAPTAIN"]
+      "realmRoles": ["VESSEL_WORKER"]
     },
     {
       "id": "c2000000-0002-0002-0002-000000000002",
@@ -154,7 +154,7 @@
       "enabled": true,
       "emailVerified": true,
       "credentials": [{ "type": "password", "value": "Captain@2026!", "temporary": false }],
-      "realmRoles": ["VESSEL_CAPTAIN"]
+      "realmRoles": ["VESSEL_WORKER"]
     },
     {
       "id": "c2000000-0003-0003-0003-000000000003",
@@ -165,7 +165,7 @@
       "enabled": true,
       "emailVerified": true,
       "credentials": [{ "type": "password", "value": "Captain@2026!", "temporary": false }],
-      "realmRoles": ["VESSEL_CAPTAIN"]
+      "realmRoles": ["VESSEL_WORKER"]
     },
     {
       "id": "d3000000-0001-0001-0001-000000000001",
