@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AssignmentCleanupScheduler {
+public class SchedulerService {
 
     private final I_UserAssignmentRepository repository;
     
