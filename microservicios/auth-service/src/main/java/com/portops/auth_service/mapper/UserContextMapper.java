@@ -2,11 +2,14 @@ package com.portops.auth_service.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.portops.auth_service.dtos.AssignmentDto;
 import com.portops.auth_service.dtos.UserContextDto;
 import com.portops.auth_service.model.UserAssignment;
 import com.portops.auth_service.model.UserContext;
 
+@Component
 public class UserContextMapper {
 
     public UserContextDto toDto(UserContext entity, List<UserAssignment> assignments) {
@@ -28,10 +31,13 @@ public class UserContextMapper {
 
         AssignmentDto dto = new AssignmentDto();
 
+        dto.setScope(a.getScope());
         dto.setEntityType(a.getEntityType());
         dto.setEntityId(a.getEntityId());
         dto.setRoleInContext(a.getRoleInContext());
         dto.setStatus(a.getStatus());
+        dto.setStartDate(a.getStartDate());
+        dto.setEndDate(a.getEndDate());
 
         return dto;
     }

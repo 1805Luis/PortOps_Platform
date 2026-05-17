@@ -1,50 +1,49 @@
 package com.portops.auth_service.mapper;
 
-import java.time.Instant;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import com.portops.auth_service.dtos.AssignmentDto;
-import com.portops.auth_service.dtos.UserAuthSnapshotDto;
-import com.portops.auth_service.dtos.UserContextDto;
-import com.portops.auth_service.model.EntityType;
+import org.springframework.stereotype.Component;
 
+import com.portops.auth_service.dtos.UserAuthSnapshotDto;
+import com.portops.auth_service.model.EntityType;
+import com.portops.auth_service.model.UserAssignment;
+
+@Component
 public class UserAuthSnapshotMapper {
 
-    public UserAuthSnapshotDto toSnapshot(UserContextDto dto) {
+    public UserAuthSnapshotDto toSnapshot(List<UserAssignment> assignments, String userId) {
 
         UserAuthSnapshotDto snapshot = new UserAuthSnapshotDto();
 
-        snapshot.setUserId(dto.getUserId());
+        snapshot.setUserId(userId);
 
         snapshot.setPortRoles(
-            dto.getAssignments().stream()
-                .filter(a -> a.getEntityType()== EntityType.PORT)
+            assignments.stream()
+                .filter(a -> a.getEntityType() == EntityType.PORT)
                 .collect(Collectors.toMap(
-                    AssignmentDto::getEntityId,
-                    AssignmentDto::getRoleInContext
+                    UserAssignment::getEntityId,
+                    UserAssignment::getRoleInContext
                 ))
         );
 
         snapshot.setOrganizationRoles(
-            dto.getAssignments().stream()
+            assignments.stream()
                 .filter(a -> a.getEntityType() == EntityType.ORGANIZATION)
                 .collect(Collectors.toMap(
-                    AssignmentDto::getEntityId,
-                    AssignmentDto::getRoleInContext
+                    UserAssignment::getEntityId,
+                    UserAssignment::getRoleInContext
                 ))
         );
 
         snapshot.setShipRoles(
-            dto.getAssignments().stream()
-                .filter(a -> a.getEntityType()== EntityType.SHIP)
+            assignments.stream()
+                .filter(a -> a.getEntityType() == EntityType.SHIP)
                 .collect(Collectors.toMap(
-                    AssignmentDto::getEntityId,
-                    AssignmentDto::getRoleInContext
+                    UserAssignment::getEntityId,
+                    UserAssignment::getRoleInContext
                 ))
         );
-
-
-        snapshot.setExpiresAt(Instant.now().plusSeconds(120));
 
         return snapshot;
     }
